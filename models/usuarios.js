@@ -28,4 +28,10 @@ const UsuarioSchema = Schema({
     }
 })
 
-module.exports('Usuario', UsuarioSchema)
+UsuarioSchema.method('toJSON',function(){
+  const {__v,_id,password,...object} = this.toObject()
+  object.id = _id
+  return object
+})
+
+module.exports= model('Usuario',UsuarioSchema)
