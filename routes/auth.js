@@ -10,4 +10,9 @@ router.post('/',[
   validarLogin
 ],loginController.login)
 
+router.post('/google',[
+  check('toke', 'El token google no puede estar vacio').not().isEmpty(),
+  validarLogin
+],loginController.loginGoogle)
+
 module.exports = router

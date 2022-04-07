@@ -30,6 +30,8 @@ app.use('/api/uploads',require('./routes/uploads'))
 //Base de datos
 dbConection();
 
+//Directorio publico
+app.use(express.static('public'))
 
 
 app.listen(PORT_ENV, () => {

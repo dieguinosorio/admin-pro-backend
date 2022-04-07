@@ -22,6 +22,10 @@ const loginController = {
       })
     }
     
+  },
+
+  loginGoogle(req,res){
+
   }
 }
 
