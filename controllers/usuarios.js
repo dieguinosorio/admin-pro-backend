@@ -8,11 +8,17 @@ const { generteJWToken } = require('../helpers/jwt')
 const usuariosController = {
 
   async getUsers(req, resp = response){
-    const usuarios = await Usuario.find({},'id nombre email password google');
+    const desde = Number(req.query.desde) || 0
+    const [usuarios,total] = await Promise.all([
+      Usuario.find({},'id nombre email password google role img').skip(desde).limit(5),
+      Usuario.countDocuments()
+    ])
+
     resp.json({
       ok: true,
       usuarios,
-      uid:req.uid
+      uid:req.uid,
+      total
     })
   },
 
