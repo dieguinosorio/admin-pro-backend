@@ -28,7 +28,6 @@ const loginController = {
         try {
             const tokenGoogle = req.body.token
             const { name, email, picture } = await googleVerify(tokenGoogle)
-            console.log(email)
             const existUser = await Usuario.findOne({ email })
             let usuario
             if (!existUser) {
@@ -58,6 +57,22 @@ const loginController = {
             })
         }
 
+    },
+
+    async renewToken(req, res = response) {
+        try {
+            const { id } = req.uid
+            const token = await generteJWToken(id);
+            res.json({
+                ok: true,
+                token
+            })
+        } catch (error) {
+            res.json({
+                ok: false,
+                msg: "Id usuario o token invalido"
+            })
+        }
     }
 }
 
