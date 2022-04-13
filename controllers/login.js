@@ -61,11 +61,13 @@ const loginController = {
 
     async renewToken(req, res = response) {
         try {
-            const { id } = req.uid
+            const id = req.uid
             const token = await generteJWToken(id);
+            const usuario = await Usuario.findById(id)
             res.json({
                 ok: true,
-                token
+                token,
+                usuario
             })
         } catch (error) {
             res.json({
