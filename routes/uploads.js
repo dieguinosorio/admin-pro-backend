@@ -15,20 +15,19 @@ const router = Router();
 //Configurar subida de archivos
 router.use(fileUpload())
 
-router.put('/:tipo/:id',[
-  validarJWT,
-  check('tipo','El tipo no puede ir vacio').not().isEmpty(), 
-  check('id','El id no puede ir vacio').not().isEmpty(), 
-  check('id','El id debe ser valido').isMongoId(), 
-  validarCampos,
-  validarUploadImg
-],uploadsController.fileUpload)
+router.put('/:tipo/:id', [
+    validarJWT,
+    check('tipo', 'El tipo no puede ir vacio').not().isEmpty(),
+    check('id', 'El id no puede ir vacio').not().isEmpty(),
+    check('id', 'El id debe ser valido').isMongoId(),
+    validarCampos,
+    validarUploadImg
+], uploadsController.fileUpload)
 
-router.get('/:tipo/:img',[
-  validarJWT,
-  check('tipo','El tipo no puede ir vacio').not().isEmpty(), 
-  check('img','El nombre de la imagen no puede estar vacio').not().isEmpty(), 
-  validarCampos,
-],uploadsController.getImg)
+router.get('/:tipo/:img', [
+    check('tipo', 'El tipo no puede ir vacio').not().isEmpty(),
+    check('img', 'El nombre de la imagen no puede estar vacio').not().isEmpty(),
+    validarCampos,
+], uploadsController.getImg)
 
 module.exports = router

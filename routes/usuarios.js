@@ -20,11 +20,9 @@ router.post('/', [
 ], usuariosController.createUser)
 
 router.put('/:id', [
-    validarJWT,
+    //validarJWT,
     check('nombre', 'El campo nombre no puede estar vacio').not().isEmpty(),
-    check('password', 'La contraseña no puede estar vacia').not().isEmpty(),
     check('email', 'El email debe ser valido').isEmail(),
-    check('role', 'El rol es obligatorio').not().isEmpty(),
     validarCampos,
 ], usuariosController.updateUser)
 
