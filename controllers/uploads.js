@@ -3,14 +3,15 @@ const path = require('path')
 const fs = require('fs')
 const { v4: uuidv4 } = require('uuid');
 const { actualizarImagen } = require('../helpers/actualizar_imagen');
+const { validationResult } = require('express-validator');
 const uploadsController = {
+  
     fileUpload(req, res = response) {
         const { tipo, id } = req.params
         const { imagen, ext } = req
         try {
             const nombreArchivo = `${uuidv4()}.${ext}`
             const rutaSave = `uploads/${tipo}/${nombreArchivo}`
-
             imagen.mv(rutaSave, (error) => {
                 if (error) {
                     console.log(error)
@@ -19,15 +20,14 @@ const uploadsController = {
                         msg: 'Error al guardar la imagen'
                     })
                 }
+                //Actualizar la imagen
+                actualizarImagen(tipo, id, nombreArchivo)
                 res.json({
                     ok: true,
-                    msg: `imagen ${nombreArchivo} guardada correctamente`
+                    msg: `imagen  guardada correctamente`,
+                    imagen:nombreArchivo
                 })
             })
-
-            //Actualizar la imagen
-            actualizarImagen(tipo, id, nombreArchivo)
-
         } catch (error) {
             res.status(500).json({
                 ok: false,

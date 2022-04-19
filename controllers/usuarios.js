@@ -79,7 +79,17 @@ const usuariosController = {
         })
       }
     }
-    campos.email = email
+
+    if(!userDb.google){
+      campos.email = email
+    }
+    else if(userDb.google && userDb.email !== email){
+      return res.status(400).json({
+        ok: false,
+        msg: `No se puede cambiar el email de un usuario de google`
+      })
+    }
+
     try{
       const usuarioUpdate = await Usuario.findByIdAndUpdate(id,campos,{new:true});
       res.json({

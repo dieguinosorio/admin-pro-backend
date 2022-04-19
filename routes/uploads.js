@@ -21,7 +21,7 @@ router.put('/:tipo/:id', [
     check('id', 'El id no puede ir vacio').not().isEmpty(),
     check('id', 'El id debe ser valido').isMongoId(),
     validarCampos,
-    validarUploadImg
+    validarUploadImg,
 ], uploadsController.fileUpload)
 
 router.get('/:tipo/:img', [

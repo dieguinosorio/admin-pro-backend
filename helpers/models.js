@@ -24,7 +24,6 @@ const getModel = (modelo) =>{
   return Models[modelo]
 }
 
-
 module.exports = {
   Models,
   getNameModels,

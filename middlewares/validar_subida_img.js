@@ -1,11 +1,9 @@
-const { validationResult } = require('express-validator')
 const { getNameModels } = require('../helpers/models')
 
 const validarUploadImg = (req,res = response,next) =>{
   const { tipo } =  req.params
   const tiposValidos = getNameModels()
   const extValidas = ['jpg','jpeg','png','gif']
-
   if(!tiposValidos.includes(tipo)) {
     return res.status(400).json({
       ok:false,
@@ -25,17 +23,18 @@ const validarUploadImg = (req,res = response,next) =>{
 
   const nombreCortado = imagen.name.split('.');
   const ext = nombreCortado.pop();
-  if(!extValidas.includes(ext)){
+  if(!extValidas.includes(ext.toLowerCase())){
     return res.status(400).json({
       ok:false,
       msg:`La extención del archivo '${ext}' no es valida debe ser ${extValidas}`
     })
   }
-
+  
   req.imagen = imagen
   req.ext = ext
-  
   next();
+  
+  
 }
 
 
