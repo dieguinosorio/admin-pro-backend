@@ -38,8 +38,7 @@ const uploadsController = {
 
     getImg(req, res = response) {
         const { tipo, img } = req.params
-        console.log(__dirname)
-            //dirname me trate a la ruta de este controller y une la nueva ruta que le estoy pasando como segundo arg y crea una sola ruta
+        //dirname me trate a la ruta de este controller y une la nueva ruta que le estoy pasando como segundo arg y crea una sola ruta
         let pathImg = path.join(__dirname, `../uploads/${tipo}/${img}`)
         if (!fs.existsSync(pathImg)) pathImg = path.join(__dirname, `../uploads/img-not-available.png`)
         res.sendFile(pathImg)

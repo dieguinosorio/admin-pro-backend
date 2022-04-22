@@ -48,9 +48,7 @@ const BusquedaGeneralController = {
       const result = await modelo.find({nombre:regExp}).populate([...populate])
       res.json({
         ok:true,
-        data:{
-          result
-        }
+        result
       })
     } catch (error) {
       console.log(error)
