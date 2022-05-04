@@ -63,6 +63,7 @@ const usuariosController = {
   async updateUser(req,res = response){
     const { id } = req.params;
     const userDb = await Usuario.findById(id);
+    
     if(!userDb){
       return res.json({
         ok:false,
@@ -71,19 +72,18 @@ const usuariosController = {
     }
     const {password,google,email,...campos} = req.body;
     if(userDb.email !== email){
-      const emailExist = await Usuario.findOne({email})
-      if(emailExist){
+      const emailExist = await Usuario.findOne({email,id:{$ne:id}})
+      if(emailExist.length){
         return res.status(400).json({
           ok: false,
           msg: `No se actualizo el usuario por que el email ${email} ya existe en la base de datos.`
         })
       }
     }
-
     if(!userDb.google){
       campos.email = email
     }
-    else if(userDb.google && userDb.email !== email){
+    else if(userDb.google === true && userDb.email !== email){
       return res.status(400).json({
         ok: false,
         msg: `No se puede cambiar el email de un usuario de google`
