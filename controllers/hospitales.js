@@ -3,7 +3,7 @@ const Hospital = require('../models/hospital')
 const hospitalesController = {
     async getHospitals(req, res = response) {
         try {
-            const hospitales = await Hospital.find({}, 'nombre id')
+            const hospitales = await Hospital.find({})
                 .populate('usuario', 'nombre email img')
             res.status(200).json({
                 ok: true,
