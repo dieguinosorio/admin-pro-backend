@@ -19,6 +19,6 @@ router.post('/', [
 
 router.put('/:id', [validarJWT], hospitalesController.updateHospitals)
 
-router.delete('/:id', [validarJWT], hospitalesController.deleteHispitals)
+router.delete('/:id', [validarJWT], hospitalesController.deleteHospitals)
 
 module.exports = router;

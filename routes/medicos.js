@@ -9,7 +9,7 @@ const { validarJWT } = require('../middlewares/jwt/validar-jwt');
 const medicosController = require('../controllers/medicos');
 const { validarCampos } = require('../middlewares/validar-campos');
 
-router.get('/', [], medicosController.getDoctors)
+router.get('/', [validarJWT], medicosController.getDoctors)
 
 router.post('/', [
     validarJWT,

@@ -63,7 +63,7 @@ const hospitalesController = {
         }
     },
 
-    async deleteHispitals(req, res = response) {
+    async deleteHospitals(req, res = response) {
         const { id } = req.body;
         const hospital = await Hospital.findOneAndDelete(id)
         if (!hospital) {
